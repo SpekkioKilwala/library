@@ -19,17 +19,19 @@
 		<form action="#" method="post" class="form-add-book">
 			<h3>Add Book</h3>
 			<label for="book-title">Title</label>
-			<input type="text" name="book-title" id="book-title" required>
+			<div><input type="text" name="book-title" id="book-title" required></div>
 			<label for="author">Author</label>
-			<input type="text" name="author" id="author" required>	
+			<div><input type="text" name="author" id="author" required></div>
 			<label for="pages">Pages</label>
-			<input type="tel" name="pages" id="pages" required>
+			<div><input type="tel" name="pages" id="pages" required></div>
 			<label for="read">Read</label>
 			<input type="checkbox" name="read" id="read">
 			<!-- Submit to make use of the required attributes, though we stay on this page -->
 			<button type="submit">Submit</button>
 		</form>
-		<div>Books Available:</div>
+		<div class="data-table">
+			Books Available:
+		</div>
 	</div>
 </body>
 </html>
