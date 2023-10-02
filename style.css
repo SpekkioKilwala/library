@@ -177,12 +177,12 @@ body {
   grid-column: 1 / -1;
 }
 
-.table-data {
-  padding-top: 10px;
-  display: grid;
-  grid-template-columns: 1fr auto auto 1fr 1fr auto;
-  column-gap: 1em;
-  justify-items: center;
+.section-table th,
+.section-table td {
+  padding-bottom: 2px;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  text-align: center;
 }
 
 .h160 {
