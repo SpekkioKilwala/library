@@ -97,6 +97,8 @@ addBook(Book(
 
 // you'll need node.parentElement
 
+
+// Consider combining these:
 /**
  * express string-able data as a Table Element (td or th)
  * @param {string} datum 
@@ -110,9 +112,6 @@ const toTE = function(datum, elementType) {
 	return te;
 }
 
-// These could be written into a single function.
-// I'm not sure if that's even a good idea.
-
 const toCBTD = function(datum, elementID) {
 	const td = document.createElement("td");
 	const cb = td.appendChild(document.createElement("input"));
@@ -123,17 +122,14 @@ const toCBTD = function(datum, elementID) {
 }
 
 /**
- * Makes a table row from an object.
- * @param {Book} book
+ * Clears and re-adds all the child notes to the given <tr>
+ * @param {HTMLElement} tr
+ * @param {Book} book 
  */
-const makeBookRow = function(book) {
-	// Given a book object,
-	// create a table row (tr > th td td td)
-	// and return that node.
-
-	// recordTableBody
-	const tr = document.createElement("tr");
-	tr.setAttribute("data-id", book.id)
+const populateBookRow = function(tr, book) {
+	tr.removeAttribute("data-id"); // in case you are reallocating the row
+	tr.replaceChildren(); // remove all children
+	tr.setAttribute("data-id", book.id);
 
 	tr.appendChild(toTE(book.id, "th")); // ID column
 	tr.appendChild(toTE(book.title, "td")); // Title column
@@ -141,12 +137,23 @@ const makeBookRow = function(book) {
 	tr.appendChild(toTE(book.pages, "td")); // Pages
 	tr.appendChild(toCBTD(book.read, `read-${book.id}`)) // Checkbox
 	tr.appendChild(toTE("Remove", "td")) // Remove thingy
+}
 
-	recordTableBody.append(tr)
+/**
+ * Makes a table row from an object.
+ * @param {Book} book
+ */
+const bookToRow = function(book) {
+	// Given a book object,
+	// create a table row (tr > th td td td)
+	// and return that node.
+	const tr = document.createElement("tr");
+	populateBookRow(tr, book);
+	return tr;
 }
 
 // note that Array.prototype.forEach() can be used in many ways
 // including getting the index of the thing directly
 // you could use (book, i) => {function guts here} and that gives you the index as well
 // and use that in your function guts.
-books.forEach((book) => makeBookRow(book));
+books.forEach((book) => recordTableBody.append(bookToRow(book)));
