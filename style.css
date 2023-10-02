@@ -47,6 +47,7 @@ input {
   background-color: transparent;
   border: none;
   color: var(--text);
+  text-shadow: var(--glow);
 }
 
 input[type="checkbox"] {
