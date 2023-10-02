@@ -103,7 +103,7 @@ addBook(Book(
  * @param {Book} book
  * 
  */
-const makeBookRow = function(id, book) {
+const makeBookRow = function(book) {
 	// Given a book object,
 	// create a table row (tr > th td td td)
 	// and return that node.
@@ -141,4 +141,8 @@ const makeBookRow = function(id, book) {
 	recordTableBody.append(tr)
 }
 
-books.forEach((book, i) => makeBookRow(i, book));
+// note that Array.prototype.forEach() can be used in many ways
+// including getting the index of the thing directly
+// you could use (book, i) => {function guts here} and that gives you the index as well
+// and use that in your function guts.
+books.forEach((book) => makeBookRow(book));
