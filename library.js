@@ -92,14 +92,10 @@ addBook(Book(
 // That object needs to be closely linked to the table
 // itself - one defines the other.
 
-// So I need osme kind of "table definition" object.
+// So I need osme kind of "table definition" objec?
 // Giving you an order of column headers and how to get each one.
 
 // you'll need node.parentElement
-
-
-// [id, title, author, pages, read... and actions]
-// [tr-of, td-of, td-of, td-of, checkbox-of with event, button with event]
 
 /**
  * express string-able data as a Table Element (td or th)
@@ -114,10 +110,14 @@ const toTE = function(datum, elementType) {
 	return te;
 }
 
-const toCBTD = function(datum) {
+// These could be written into a single function.
+// I'm not sure if that's even a good idea.
+
+const toCBTD = function(datum, elementID) {
 	const td = document.createElement("td");
 	const cb = td.appendChild(document.createElement("input"));
 	cb.setAttribute("type", "checkbox");
+	cb.setAttribute("id", elementID);
 	cb.checked = datum;
 	return td;
 }
@@ -139,13 +139,7 @@ const makeBookRow = function(book) {
 	tr.appendChild(toTE(book.title, "td")); // Title column
 	tr.appendChild(toTE(book.author, "td")); // Author
 	tr.appendChild(toTE(book.pages, "td")); // Pages
-
-	tr.appendChild(toCBTD(book.read)) // Checkbox
-	// td = tr.appendChild(document.createElement("td"));
-	// let cb = td.appendChild(document.createElement("input"));
-	// cb.setAttribute("type", "checkbox");
-	// cb.checked = book.read;
-
+	tr.appendChild(toCBTD(book.read, `read-${book.id}`)) // Checkbox
 	tr.appendChild(toTE("Remove", "td")) // Remove thingy
 
 	recordTableBody.append(tr)
