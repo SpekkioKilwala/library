@@ -49,6 +49,26 @@ input {
   color: var(--text);
 }
 
+input[type="checkbox"] {
+  appearance: none;
+  border: 2px solid var(--text);
+  position: relative;
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+input[type=checkbox]::before {
+  content: '✓';
+  position: absolute;
+  font-size: 1.2rem;
+  right: 1px;
+  visibility: hidden;
+}
+
+input[type=checkbox]:checked::before {
+  visibility: visible;
+}
+
 /* top-level layout */
 body {
   height: 100vh;
@@ -121,6 +141,7 @@ body {
 
 .form-add-book > input[type=checkbox] {
   grid-column: 2 / -1;
+  margin-left: 30px;
   justify-self: self-start;
 }
 
