@@ -1,3 +1,7 @@
+/* Terminal styling:
+* https://css-tricks.com/old-timey-terminal-styling/
+*/
+
 * {
   margin: 0px;
   box-sizing: border-box;
@@ -5,16 +9,38 @@
 
 :root {
   --bg: black;
-  --border: yellow;
-  --text: yellow;
+  --bg-image: radial-gradient(
+    rgba(150, 127, 0, 0.3), black 120%
+  );
+  --border: #fbbf24;
+  --text: #fbbf24;
+  --glow: 0 0 5px #bd8f1d;
   --temp-outline: 1px dashed white;
 }
 
 /* appearance */
 body {
   background-color: var(--bg);
+  background-image: var(--bg-image);
   color: var(--text);
-  font-size: 1.2rem;  
+  font: 1.0rem Inconsolata, monospace; 
+  text-shadow: var(--glow);
+}
+
+body::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
 }
 
 /* top-level layout */
