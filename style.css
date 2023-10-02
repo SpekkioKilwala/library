@@ -3,10 +3,17 @@
   box-sizing: border-box;
 }
 
+:root {
+  --bg: black;
+  --border: yellow;
+  --text: yellow;
+  --temp-outline: 1px dashed white;
+}
+
 /* appearance */
 body {
-  background-color: black;
-  color: rgb(216, 216, 0);
+  background-color: var(--bg);
+  color: var(--text);
   font-size: 1.2rem;  
 }
 
@@ -34,7 +41,7 @@ body {
 }
 
 .brace {
-  border: 1px dashed white;
+  border: var(--temp-outline);
   display: flex;
   align-items: center;
   justify-items: center;
@@ -46,7 +53,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 2px solid yellow;
+  border-bottom: 2px solid var(--border);
 }
 
 .sidebar {
@@ -54,7 +61,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-right: 2px solid yellow;
+  border-right: 2px solid var(--border);
 }
 
 .main {
