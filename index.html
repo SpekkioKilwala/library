@@ -16,19 +16,19 @@
 		<div class="brace h160">sidebar</div>
 	</div>
 	<div class="main">
-		<div class="form add-book">
+		<form action="#" method="post" class="form-add-book">
 			<h3>Add Book</h3>
 			<label for="book-title">Title</label>
-			<input type="text" name="book-title" id="book-title">
+			<input type="text" name="book-title" id="book-title" required>
 			<label for="author">Author</label>
-			<input type="text" name="author" id="author">	
+			<input type="text" name="author" id="author" required>	
 			<label for="pages">Pages</label>
-			<input type="tel" name="pages" id="pages">
+			<input type="tel" name="pages" id="pages" required>
 			<label for="read">Read</label>
 			<input type="checkbox" name="read" id="read">
 			<!-- Submit to make use of the required attributes, though we stay on this page -->
 			<button type="submit">Submit</button>
-		</div>
+		</form>
 		<div>Books Available:</div>
 	</div>
 </body>
