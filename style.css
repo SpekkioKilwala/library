@@ -49,16 +49,6 @@ input {
   color: var(--text);
 }
 
-.form-add-book > div::before {
-  font-size: 180%;
-  content: "[";
-}
-
-.form-add-book > div::after {
-  font-size: 180%;
-  content: "]";
-}
-
 /* top-level layout */
 body {
   height: 100vh;
@@ -117,20 +107,33 @@ body {
 
 .form-add-book {
   display: grid;
-  grid-template-columns: 200px auto;
+  grid-template-columns: 200px min-content 300px min-content;
+  grid-template-rows: 2rem;
+  grid-auto-rows: 2rem;
   align-items: center;
+}
+
+.form-add-book > div {
+  font-size: 180%;
+  margin-top: -8px;
+  /* height: 2.6rem; */
+}
+
+.form-add-book > input[type=checkbox] {
+  grid-column: 2 / -1;
+  justify-self: self-start;
 }
 
 .form-add-book h3 {
   grid-column: 1 / -1;
 }
 
-.form-add-book > div {
+/* .form-add-book > div {
   display: grid;
   grid-template-columns: min-content auto min-content;
   align-items: center;
   text-align: center;
-}
+} */
 
 .h160 {
   width: 160px;
