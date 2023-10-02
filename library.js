@@ -26,7 +26,7 @@ const addBook = function(_book) {
 
 addBook(Book(
 	"The Hobbit",
-	"Jolkein Rolkein Rolkein Tolkein",
+	"Jolkien Rolkien Rolkien Tolkien",
 	310,
 	true
 ));
