@@ -52,7 +52,16 @@ input {
 input[type="checkbox"] {
   appearance: none;
   border: 2px solid var(--text);
+  -webkit-box-shadow: 0px 0px 5px 5px var(--glow); 
+  box-shadow: 0px 0px 5px 5px var(--glow);
   position: relative;
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+input[type="checkbox"]::after {
+  position: absolute;
+  border: 1px solid red;
   width: 1.4rem;
   height: 1.4rem;
 }
@@ -66,6 +75,7 @@ input[type=checkbox]::before {
 }
 
 input[type=checkbox]:checked::before {
+  /* content: '✓'; */
   visibility: visible;
 }
 
