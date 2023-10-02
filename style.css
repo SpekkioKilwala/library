@@ -53,6 +53,7 @@ input {
 input[type="checkbox"] {
   appearance: none;
   border: 2px solid var(--text);
+  /* this glow doesn't work right */
   -webkit-box-shadow: 0px 0px 5px 5px var(--glow); 
   box-shadow: 0px 0px 5px 5px var(--glow);
   position: relative;
@@ -60,12 +61,12 @@ input[type="checkbox"] {
   height: 1.4rem;
 }
 
-input[type="checkbox"]::after {
+/* input[type="checkbox"]::after {
   position: absolute;
   border: 1px solid red;
   width: 1.4rem;
   height: 1.4rem;
-}
+} */
 
 input[type=checkbox]::before {
   content: '✓';
@@ -78,6 +79,15 @@ input[type=checkbox]::before {
 input[type=checkbox]:checked::before {
   /* content: '✓'; */
   visibility: visible;
+}
+
+button {
+  background-color: transparent;
+  border: 2px solid var(--border);
+  border-radius: 2px;
+  color: var(--text);
+  cursor: pointer;
+  text-shadow: var(--glow);
 }
 
 /* top-level layout */
@@ -154,6 +164,12 @@ body {
   grid-column: 2 / -1;
   margin-left: 30px;
   justify-self: self-start;
+}
+
+.form-add-book > button {
+  grid-column: 3;
+  justify-self: center;
+  width: 100px;
 }
 
 .form-add-book h3 {
