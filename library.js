@@ -68,13 +68,66 @@ addBook(Book(
 //	and each row (tr) can have the object ID for class too.
 //		The ID column is just for user information.
 
+// Unavoidable:
+// Data is being presented from raw objects to the user,
+// I need a definition of how that data is presented somewhere.
+// Like a query on a table;
+// for a single boolean, do you display TRUE/FALSE? A checkbox? 0 and -1?
+// The "data presentation" connects three pieces of information:
+// 	- the table column
+//	- the source of the data
+//	- the formatting of the data
+// That object needs to be closely linked to the table
+// itself - one defines the other.
+
+// So I need osme kind of "table definition" object.
+// Giving you an order of column headers and how to get each one.
+
+
 // you'll need node.parentElement
 
+/**
+ * Makes a table row from an object.
+ * @param {number} id
+ * @param {Book} book
+ * 
+ */
+const makeBookRow = function(id, book) {
+	// Given a book object,
+	// create a table row (tr > th td td td)
+	// and return that node.
 
-const addRow = function() {
 	// recordTableBody
 	const tr = document.createElement("tr");
-	let td = tr.appendChild(document.createElement("td"))
-	td.textContent = "000"
+	tr.setAttribute("data-id", id)
+
+	// ID column
+	let td = tr.appendChild(document.createElement("td"));
+	td.textContent = id;
+
+	// Title column
+	td = tr.appendChild(document.createElement("td"));
+	td.textContent = book.title;
+
+	// Author
+	td = tr.appendChild(document.createElement("td"));
+	td.textContent = book.author;
+
+	// Pages
+	td = tr.appendChild(document.createElement("td"));
+	td.textContent = book.pages;
+
+	// Checkbox
+	td = tr.appendChild(document.createElement("td"));
+	let cb = td.appendChild(document.createElement("input"));
+	cb.setAttribute("type", "checkbox");
+	cb.checked = book.read;
+
+	// Remove thingy
+	td = tr.appendChild(document.createElement("td"))
+	td.textContent = "Remove"
+
 	recordTableBody.append(tr)
 }
+
+books.forEach((book, i) => makeBookRow(i, book));
