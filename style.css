@@ -177,12 +177,13 @@ body {
   grid-column: 1 / -1;
 }
 
-/* .form-add-book > div {
+.table-data {
+  padding-top: 10px;
   display: grid;
-  grid-template-columns: min-content auto min-content;
-  align-items: center;
-  text-align: center;
-} */
+  grid-template-columns: 1fr auto auto 1fr 1fr auto;
+  column-gap: 1em;
+  justify-items: center;
+}
 
 .h160 {
   width: 160px;
