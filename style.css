@@ -1,0 +1,30 @@
+* {
+  margin: 0px;
+}
+
+/* appearance */
+body {
+  background-color: black;
+  color: rgb(216, 216, 0);
+  font-size: 1.2rem;  
+}
+
+/* top-level layout */
+body {
+  display: grid;
+  grid-template-areas: 
+    "header header"
+    "sidebar main";
+}
+
+.header {
+  grid-area: header;
+}
+
+.sidebar {
+  grid-area: sidebar;
+}
+
+.main {
+  grid-area: main;
+}
