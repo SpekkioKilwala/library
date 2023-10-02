@@ -6,12 +6,21 @@ const recordTableBody = recordTable.querySelector("tbody")
 
 // (yes, the original task was with a constructor)
 // (but I like factories better)
-const Book = function(title, author, pages, read) {
+/**
+ * Makes a book object.
+ * @param {number} id
+ * @param {string} title
+ * @param {string} author
+ * @param {string} pages
+ * @param {boolean} read
+ */
+const Book = function(id, title, author, pages, read) {
 	const info = function() {
 		return (`${this.title}, by ${this.author}, ${this.pages} pages, read: ${this.read}`)
 	}
 
 	return {
+		id,
 		title,
 		author,
 		pages,
@@ -29,6 +38,7 @@ const addBook = function(_book) {
 }
 
 addBook(Book(
+	1,
 	"The Hobbit",
 	"Jolkien Rolkien Rolkien Tolkien",
 	310,
@@ -36,6 +46,7 @@ addBook(Book(
 ));
 
 addBook(Book(
+	2,
 	"Howl's Moving Castle",
 	"Diana Wynne Jones",
 	329,
@@ -43,6 +54,7 @@ addBook(Book(
 ));
 
 addBook(Book(
+	3,
 	"The Well of Lost Plots",
 	"Jasper Fforde",
 	360,
@@ -88,7 +100,6 @@ addBook(Book(
 
 /**
  * Makes a table row from an object.
- * @param {number} id
  * @param {Book} book
  * 
  */
@@ -99,11 +110,11 @@ const makeBookRow = function(id, book) {
 
 	// recordTableBody
 	const tr = document.createElement("tr");
-	tr.setAttribute("data-id", id)
+	tr.setAttribute("data-id", book.id)
 
 	// ID column
 	let td = tr.appendChild(document.createElement("td"));
-	td.textContent = id;
+	td.textContent = book.id;
 
 	// Title column
 	td = tr.appendChild(document.createElement("td"));
