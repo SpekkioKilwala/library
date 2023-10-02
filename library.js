@@ -95,13 +95,36 @@ addBook(Book(
 // So I need osme kind of "table definition" object.
 // Giving you an order of column headers and how to get each one.
 
-
 // you'll need node.parentElement
+
+
+// [id, title, author, pages, read... and actions]
+// [tr-of, td-of, td-of, td-of, checkbox-of with event, button with event]
+
+/**
+ * express string-able data as a Table Element (td or th)
+ * @param {string} datum 
+ * @param {string} elementType
+ * @returns HTMLElement
+ */
+const toTE = function(datum, elementType) {
+	// console.log(`${datum} : ${elementType}`);
+	const te = document.createElement(elementType);
+	te.textContent = datum;
+	return te;
+}
+
+const toCBTD = function(datum) {
+	const td = document.createElement("td");
+	const cb = td.appendChild(document.createElement("input"));
+	cb.setAttribute("type", "checkbox");
+	cb.checked = datum;
+	return td;
+}
 
 /**
  * Makes a table row from an object.
  * @param {Book} book
- * 
  */
 const makeBookRow = function(book) {
 	// Given a book object,
@@ -112,31 +135,18 @@ const makeBookRow = function(book) {
 	const tr = document.createElement("tr");
 	tr.setAttribute("data-id", book.id)
 
-	// ID column
-	let td = tr.appendChild(document.createElement("td"));
-	td.textContent = book.id;
+	tr.appendChild(toTE(book.id, "th")); // ID column
+	tr.appendChild(toTE(book.title, "td")); // Title column
+	tr.appendChild(toTE(book.author, "td")); // Author
+	tr.appendChild(toTE(book.pages, "td")); // Pages
 
-	// Title column
-	td = tr.appendChild(document.createElement("td"));
-	td.textContent = book.title;
+	tr.appendChild(toCBTD(book.read)) // Checkbox
+	// td = tr.appendChild(document.createElement("td"));
+	// let cb = td.appendChild(document.createElement("input"));
+	// cb.setAttribute("type", "checkbox");
+	// cb.checked = book.read;
 
-	// Author
-	td = tr.appendChild(document.createElement("td"));
-	td.textContent = book.author;
-
-	// Pages
-	td = tr.appendChild(document.createElement("td"));
-	td.textContent = book.pages;
-
-	// Checkbox
-	td = tr.appendChild(document.createElement("td"));
-	let cb = td.appendChild(document.createElement("input"));
-	cb.setAttribute("type", "checkbox");
-	cb.checked = book.read;
-
-	// Remove thingy
-	td = tr.appendChild(document.createElement("td"))
-	td.textContent = "Remove"
+	tr.appendChild(toTE("Remove", "td")) // Remove thingy
 
 	recordTableBody.append(tr)
 }
