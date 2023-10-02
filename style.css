@@ -149,10 +149,11 @@ body {
 
 .form-add-book {
   display: grid;
-  grid-template-columns: 200px min-content 300px min-content;
+  grid-template-columns: 80px min-content 300px min-content;
   grid-template-rows: 2rem;
   grid-auto-rows: 2rem;
   align-items: center;
+  justify-self: center;
 }
 
 .form-add-book > div {
@@ -163,7 +164,7 @@ body {
 
 .form-add-book > input[type=checkbox] {
   grid-column: 2 / -1;
-  margin-left: 30px;
+  margin-left: 5px;
   justify-self: self-start;
 }
 
