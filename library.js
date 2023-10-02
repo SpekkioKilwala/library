@@ -1,5 +1,9 @@
 "use strict";
 
+// DOM-finding stuff
+const recordTable = document.querySelector(".section-table").querySelector("table")
+const recordTableBody = recordTable.querySelector("tbody")
+
 // (yes, the original task was with a constructor)
 // (but I like factories better)
 const Book = function(title, author, pages, read) {
@@ -44,3 +48,11 @@ addBook(Book(
 	360,
 	true
 ));
+
+const addRow = function() {
+	// recordTableBody
+	const tr = document.createElement("tr");
+	let td = tr.appendChild(document.createElement("td"))
+	td.textContent = "000"
+	recordTableBody.append(tr)
+}
