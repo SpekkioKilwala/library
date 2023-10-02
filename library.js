@@ -25,15 +25,22 @@ const addBook = function(_book) {
 }
 
 addBook(Book(
-		"The Hobbit",
+	"The Hobbit",
 	"Jolkein Rolkein Rolkein Tolkein",
-	"5",
+	310,
 	true
 ));
 
+addBook(Book(
+	"Howl's Moving Castle",
+	"Diana Wynne Jones",
+	329,
+	true
+));
 
-books.push(Book(
-	"The Hobbit",
-	"Jolkein Rolkein Rolkein Tolkein",
-	"5",
-	true));
+addBook(Book(
+	"The Well of Lost Plots",
+	"Jasper Fforde",
+	360,
+	true
+));
