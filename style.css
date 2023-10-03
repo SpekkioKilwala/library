@@ -46,6 +46,16 @@ body {
 /* dialogs don't inherit a lot of things*/
 dialog {
   background-color: var(--bg);
+  /* they don't inherit background image either, which is the glow in this case */
+  /* Note that the radial gradient will have to join seamlessly onto the */
+  /* main full-screen-size one. */
+  /* Having your modal be centred in the first place makes this relatively
+  easy: you just scale your modal background to be the same as the original
+  winhow and center it too.
+  If you had anything more complicated you may need to calculate where exactly
+  the modal ended up and use that to reposition the background image.
+  Or, if things were a complete disaster: I'd just invert the colour scheme
+  of the popup and give up on the radial background entirely. */
   background-image: var(--bg-image);
   background-size: 100vw 100vh;
   background-position: center;
