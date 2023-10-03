@@ -4,12 +4,20 @@
 const recordTable = document.querySelector(".section-table").querySelector("table");
 const recordTableBody = recordTable.querySelector("tbody");
 
+const newBookButton = document.querySelector('#add-book-open') // open dialog
+const addBookDialog = document.querySelector('#add-book-dialog')
+
 const formAddBook = document.querySelector(".form-add-book");
 const formTitle = document.querySelector("#book-title");
 const formAuthor = document.querySelector("#author");
 const formPages = document.querySelector("#pages");
 const formRead = document.querySelector("#read");
-const submitButton = document.querySelector("#addBookButton");
+const submitButton = document.querySelector("#add-book-submit");
+
+newBookButton.addEventListener("click", (e) => {
+	addBookDialog.showModal();
+});
+
 
 // this could be an object
 const books = [];
