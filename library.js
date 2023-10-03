@@ -1,11 +1,14 @@
 "use strict";
 
 // DOM-finding stuff
-const recordTable = document.querySelector(".section-table").querySelector("table")
-const recordTableBody = recordTable.querySelector("tbody")
+const recordTable = document.querySelector(".section-table").querySelector("table");
+const recordTableBody = recordTable.querySelector("tbody");
+const submitButton = document.querySelector("#addBookButton");
 
-// (yes, the original task was with a constructor)
-// (but I like factories better)
+submitButton.addEventListener("click", (e) => {
+	console.log("ping!");
+});
+
 /**
  * Makes a book object.
  * @param {number} id
@@ -30,14 +33,9 @@ const Book = function(id, title, author, pages, read) {
 }
 
 // this could be an object
-const books = []
+const books = [];
 
-// it seems silly for this to be its own function, but whatever
-const addBook = function(_book) {
-	books.push(_book)
-}
-
-addBook(Book(
+books.push(Book(
 	1,
 	"The Hobbit",
 	"Jolkien Rolkien Rolkien Tolkien",
@@ -45,7 +43,7 @@ addBook(Book(
 	true
 ));
 
-addBook(Book(
+books.push(Book(
 	2,
 	"Howl's Moving Castle",
 	"Diana Wynne Jones",
@@ -53,7 +51,7 @@ addBook(Book(
 	true
 ));
 
-addBook(Book(
+books.push(Book(
 	3,
 	"The Well of Lost Plots",
 	"Jasper Fforde",
@@ -98,7 +96,12 @@ addBook(Book(
 // you'll need node.parentElement
 
 
-// Consider combining these:
+// these make too many assumptions but making a singular general
+// form would be 3x as many lines for no benefit.
+// Alternatively, this logic could be known to the book objects themselves.
+// 	"book, tell me what that member looks like as a table row."
+// But I'm pretty sure THAT'S a violation of separation of concerns.
+// (books don't give a shit about how that data is presented. That's another layer out.)
 /**
  * express string-able data as a Table Element (td or th)
  * @param {string} datum 

@@ -9,4 +9,8 @@ Three main, independent arms that all need development.
     An edit should work very similarly to the original creation because you just want
     to re-create that html element from the underlying object.
 
-2 and 3 go back to the question of how the DOM and the data objects are actually *related*.
+
+Status:
+1: Nothing done here at all
+2: Sufficient. At least most of what I have here has multiple uses.
+3: Nothing done here at all

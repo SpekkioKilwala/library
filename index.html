@@ -16,7 +16,7 @@
 		<div class="brace h160">sidebar</div>
 	</div>
 	<div class="main">
-		<form action="#" method="post" class="form-add-book">
+		<form action="#" method="post" class="form-add-book" onsubmit="return false;">
 			<h3>Add Book</h3>
 			<label for="book-title">Title</label>
 			<div>[</div><input type="text" name="book-title" id="book-title" placeholder="The Wind in the Willows" required><div>]</div>
@@ -27,7 +27,7 @@
 			<label for="read">Read</label>
 			<input type="checkbox" name="read" id="read">
 			<!-- Submit to make use of the required attributes, though we stay on this page -->
-			<button type="submit">Submit</button>
+			<button type="submit" id="addBookButton">Submit</button>
 		</form>
 		<div class="section-table">
 			<!-- Working with tables: -->
