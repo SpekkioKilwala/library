@@ -46,6 +46,9 @@ body {
 /* dialogs don't inherit a lot of things*/
 dialog {
   background-color: var(--bg);
+  background-image: var(--bg-image);
+  background-size: 100vw 100vh;
+  background-position: center;
   color: var(--text);
   &::after {
     content: "";
