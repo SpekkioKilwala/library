@@ -156,9 +156,9 @@ submitButton.addEventListener("click", (e) => {
 		formRead.checked
 	);
 	console.log(newBook);
-	// I don't like that these two things have to happen together
-	// They can be combined into a new function that does both things
-	addBook(newBook);
+	if (addBook(newBook)) {
+		formAddBook.reset();
+	}
 	return;
 });
 
@@ -167,13 +167,14 @@ submitButton.addEventListener("click", (e) => {
  * AND the DOM table. Prefer using this over
  * separate operations!
  * Todo: checking for duplicates in either case.
- * Todo: return false if the process failed ()
+ * Todo: return false if the process failed ("failed" not defined)
  * Todo: throw errors?
  * @param {Book} book 
  */
 const addBook = function(book) {
 	books.push(book);
 	recordTableBody.append(bookToRow(book));
+	return true;
 }
 
 addBook(Book(
