@@ -126,6 +126,7 @@ const toTE = function(datum, elementType) {
 
 /**
  * Express boolean as a checkbox input inside a <td>
+ * ALSO adds the event listener.
  * @function
  * @param {string} datum 
  * @param {string} elementID
@@ -137,6 +138,10 @@ const toCBTD = function(datum, elementID) {
 	cb.setAttribute("type", "checkbox");
 	cb.setAttribute("id", elementID);
 	cb.checked = datum;
+	cb.addEventListener("click", (e) => {
+		// How do references work? Is it Ok to have like, a million of these on a page?
+		console.log(`${cb.id} : ${cb.checked}`)
+	});
 	return td;
 }
 
