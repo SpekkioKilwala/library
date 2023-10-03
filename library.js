@@ -158,8 +158,7 @@ submitButton.addEventListener("click", (e) => {
 	console.log(newBook);
 	// I don't like that these two things have to happen together
 	// They can be combined into a new function that does both things
-	books.push(newBook);
-	recordTableBody.append(bookToRow(newBook));
+	addBook(newBook);
 	return;
 });
 
