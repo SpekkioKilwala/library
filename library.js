@@ -129,27 +129,24 @@ const toTE = function(datum, elementType) {
  * ALSO adds the event listener.
  * @function
  * @param {string} datum 
+ * @param {function} handler
  * @param {string} elementID
- * @param {book} book
  * @returns {HTMLElement}
  */
-const toCBTD = function(datum, book, elementID) {
+const toCBTD = function(datum, handler, elementID) {
 	const td = document.createElement("td");
 	const cb = td.appendChild(document.createElement("input"));
 	cb.setAttribute("type", "checkbox");
 	cb.setAttribute("id", elementID);
 	cb.checked = datum;
 	// Because you can always move nodes around, the event listener
-	// has to be created correctly when the checkbox is.
+	// has to be attached correctly (in this case, also created)
+	// when the checkbox is.
 	cb.addEventListener("click", (e) => {
-		// How do references work? Is it Ok to have like, a million of these on a page?
-		// This DOES work!
-		// However, putting book-specific behaviour inside the event handler and into
-		// the function profile means that this once-general function now has
-		// very specific use-cases.
-		// I think that means that I need to pass in a handler.
+		// I'm still assuming that every checkbox will need a click handler
 		console.log(`${cb.id} : ${cb.checked}`);
-		book.read = cb.checked;
+		//book.read = cb.checked;
+		handler(e, cb.checked, cb.id);
 	});
 	return td;
 }
@@ -168,7 +165,7 @@ const populateBookRow = function(tr, book) {
 	tr.appendChild(toTE(book.title, "td")); // Title column
 	tr.appendChild(toTE(book.author, "td")); // Author
 	tr.appendChild(toTE(book.pages, "td")); // Pages
-	tr.appendChild(toCBTD(book.read, book, `read-${book.id}`)) // Checkbox
+	tr.appendChild(toCBTD(book.read, (e, newState, cbID) => {book.read = newState}, `read-${book.id}`)) // Checkbox
 	tr.appendChild(toTE("Remove", "td")) // Remove thingy
 }
 
