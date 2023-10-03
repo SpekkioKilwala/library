@@ -65,6 +65,14 @@ dialog {
   }
 }
 
+#add-book-dialog {
+  position: absolute;
+  
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
 input {
   background-color: transparent;
   border: none;
@@ -225,6 +233,13 @@ body {
 .section-table td input[type=checkbox] {
   margin-bottom: -4px;
 }
+
+/* https://stackoverflow.com/questions/1205457/how-to-design-a-css-for-a-centered-floating-confirm-dialog */
+/* .dialog-wrapper {
+  top: 50%;
+  left: 50%;
+  position: absolute;
+} */
 
 .h160 {
   width: 160px;
