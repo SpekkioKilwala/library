@@ -4,9 +4,15 @@
 const recordTable = document.querySelector(".section-table").querySelector("table");
 const recordTableBody = recordTable.querySelector("tbody");
 const submitButton = document.querySelector("#addBookButton");
+const formAddBook = document.querySelector(".form-add-book");
 
 submitButton.addEventListener("click", (e) => {
-	console.log("ping!");
+	if (!formAddBook.checkValidity()) {
+		console.log("Fail!");
+		return;
+	}
+	console.log("Success!");
+	return;
 });
 
 /**
