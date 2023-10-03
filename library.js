@@ -3,17 +3,26 @@
 // DOM-finding stuff
 const recordTable = document.querySelector(".section-table").querySelector("table");
 const recordTableBody = recordTable.querySelector("tbody");
-const submitButton = document.querySelector("#addBookButton");
-const formAddBook = document.querySelector(".form-add-book");
 
-submitButton.addEventListener("click", (e) => {
-	if (!formAddBook.checkValidity()) {
-		console.log("Fail!");
-		return;
+const formAddBook = document.querySelector(".form-add-book");
+const formTitle = document.querySelector("#book-title");
+const formAuthor = document.querySelector("#author");
+const formPages = document.querySelector("#pages");
+const formRead = document.querySelector("#read");
+const submitButton = document.querySelector("#addBookButton");
+
+// this could be an object
+const books = [];
+
+function* counter() {
+	let index = 1;
+	while (true) {
+		yield index++;
 	}
-	console.log("Success!");
-	return;
-});
+}
+const idGenerator = counter(); // not a singleton!
+// if you want to be safer about this, you could
+// use time-based IDs or the singleton pattern.
 
 /**
  * Makes a book object.
@@ -38,11 +47,8 @@ const Book = function(id, title, author, pages, read) {
 	}
 }
 
-// this could be an object
-const books = [];
-
 books.push(Book(
-	1,
+	idGenerator.next().value,
 	"The Hobbit",
 	"Jolkien Rolkien Rolkien Tolkien",
 	310,
@@ -50,7 +56,7 @@ books.push(Book(
 ));
 
 books.push(Book(
-	2,
+	idGenerator.next().value,
 	"Howl's Moving Castle",
 	"Diana Wynne Jones",
 	329,
@@ -58,7 +64,7 @@ books.push(Book(
 ));
 
 books.push(Book(
-	3,
+	idGenerator.next().value,
 	"The Well of Lost Plots",
 	"Jasper Fforde",
 	360,
@@ -160,6 +166,22 @@ const bookToRow = function(book) {
 	populateBookRow(tr, book);
 	return tr;
 }
+
+submitButton.addEventListener("click", (e) => {
+	if (!formAddBook.checkValidity()) {
+		console.log("Fail!");
+		return;
+	}
+	const newBook = Book(
+		idGenerator.next().value,
+		formTitle.value,
+		formAuthor.value,
+		formPages.value,
+		formRead.checked
+	);
+	console.log(newBook);
+	return;
+});
 
 // note that Array.prototype.forEach() can be used in many ways
 // including getting the index of the thing directly
