@@ -184,6 +184,7 @@ submitButton.addEventListener("click", (e) => {
 	);
 	console.log(newBook);
 	if (addBook(newBook)) {
+		addBookDialog.close();
 		formAddBook.reset();
 	}
 	return;
