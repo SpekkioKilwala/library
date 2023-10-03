@@ -207,7 +207,7 @@ body {
 }
 
 /* need to rename this */
-.form-add-book #test-close {
+.form-add-book #dialog-close {
   margin-bottom: 10px;
   grid-column: 2 / -1;
   justify-self: end;

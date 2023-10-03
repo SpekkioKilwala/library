@@ -8,7 +8,7 @@ const newBookButton = document.querySelector('#add-book-open') // open dialog
 const addBookDialog = document.querySelector('#add-book-dialog')
 
 // testing only!
-const testClose = document.querySelector('#test-close')
+const dialogClose = document.querySelector('#dialog-close')
 
 const formAddBook = document.querySelector(".form-add-book");
 const formTitle = document.querySelector("#book-title");
@@ -21,7 +21,7 @@ newBookButton.addEventListener("click", (e) => {
 	addBookDialog.showModal();
 });
 
-testClose.addEventListener("click", (e) => {
+dialogClose.addEventListener("click", (e) => {
 	addBookDialog.close();
 });
 
