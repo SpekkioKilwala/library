@@ -16,19 +16,6 @@
 		<div class="brace h160">sidebar</div>
 	</div>
 	<div class="main">
-		<form action="#" method="post" class="form-add-book" onsubmit="return false;">
-			<h3>Add Book</h3>
-			<label for="book-title">Title</label>
-			<div>[</div><input type="text" name="book-title" id="book-title" placeholder="The Wind in the Willows" required><div>]</div>
-			<label for="author">Author</label>
-			<div>[</div><input type="text" name="author" id="author" required><div>]</div>
-			<label for="pages">Pages</label>
-			<div>[</div><input type="tel" name="pages" id="pages" required><div>]</div>
-			<label for="read">Read</label>
-			<input type="checkbox" name="read" id="read">
-			<!-- Submit to make use of the required attributes, though we stay on this page -->
-			<button type="submit" id="add-book-submit">Submit</button>
-		</form>
 		<button type="button" id="add-book-open">New Book</button>
 		<div class="section-table">
 			<!-- Working with tables: -->
@@ -61,7 +48,19 @@
 	<!-- It doesn't seem to matter? -->
 	<!-- At the very least, at the end of the body it should be least likely to hurt something. -->
 	<dialog id="add-book-dialog">		
-		Test
+		<form action="#" method="post" class="form-add-book" onsubmit="return false;">
+			<h3>Add Book</h3>
+			<label for="book-title">Title</label>
+			<div>[</div><input type="text" name="book-title" id="book-title" placeholder="The Wind in the Willows" required><div>]</div>
+			<label for="author">Author</label>
+			<div>[</div><input type="text" name="author" id="author" required><div>]</div>
+			<label for="pages">Pages</label>
+			<div>[</div><input type="tel" name="pages" id="pages" required><div>]</div>
+			<label for="read">Read</label>
+			<input type="checkbox" name="read" id="read">
+			<!-- Submit to make use of the required attributes, though we stay on this page -->
+			<button type="submit" id="add-book-submit">Submit</button>
+		</form>
 		<button type="button" id="test-close">Close</button>
 	</dialog>
 </body>
