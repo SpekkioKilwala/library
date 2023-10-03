@@ -47,30 +47,6 @@ const Book = function(id, title, author, pages, read) {
 	}
 }
 
-books.push(Book(
-	idGenerator.next().value,
-	"The Hobbit",
-	"Jolkien Rolkien Rolkien Tolkien",
-	310,
-	true
-));
-
-books.push(Book(
-	idGenerator.next().value,
-	"Howl's Moving Castle",
-	"Diana Wynne Jones",
-	329,
-	true
-));
-
-books.push(Book(
-	idGenerator.next().value,
-	"The Well of Lost Plots",
-	"Jasper Fforde",
-	360,
-	true
-));
-
 // What I'd really, really want is the ability
 // to look for the appropriate header for any
 // given table-cell that is nominated.
@@ -180,11 +156,53 @@ submitButton.addEventListener("click", (e) => {
 		formRead.checked
 	);
 	console.log(newBook);
+	// I don't like that these two things have to happen together
+	// They can be combined into a new function that does both things
+	books.push(newBook);
+	recordTableBody.append(bookToRow(newBook));
 	return;
 });
+
+/**
+ * Given a book, adds that to the JS-level data
+ * AND the DOM table. Prefer using this over
+ * separate operations!
+ * Todo: checking for duplicates in either case.
+ * Todo: return false if the process failed ()
+ * Todo: throw errors?
+ * @param {Book} book 
+ */
+const addBook = function(book) {
+	books.push(book);
+	recordTableBody.append(bookToRow(book));
+}
+
+addBook(Book(
+	idGenerator.next().value,
+	"The Hobbit",
+	"Jolkien Rolkien Rolkien Tolkien",
+	310,
+	true
+));
+
+addBook(Book(
+	idGenerator.next().value,
+	"Howl's Moving Castle",
+	"Diana Wynne Jones",
+	329,
+	true
+));
+
+addBook(Book(
+	idGenerator.next().value,
+	"The Well of Lost Plots",
+	"Jasper Fforde",
+	360,
+	true
+));
 
 // note that Array.prototype.forEach() can be used in many ways
 // including getting the index of the thing directly
 // you could use (book, i) => {function guts here} and that gives you the index as well
 // and use that in your function guts.
-books.forEach((book) => recordTableBody.append(bookToRow(book)));
+// books.forEach((book) => recordTableBody.append(bookToRow(book)));
