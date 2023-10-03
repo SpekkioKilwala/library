@@ -19,6 +19,7 @@ const submitButton = document.querySelector("#add-book-submit");
 
 newBookButton.addEventListener("click", (e) => {
 	addBookDialog.showModal();
+	formAddBook.reset();
 });
 
 dialogClose.addEventListener("click", (e) => {
@@ -185,7 +186,6 @@ submitButton.addEventListener("click", (e) => {
 	console.log(newBook);
 	if (addBook(newBook)) {
 		addBookDialog.close();
-		formAddBook.reset();
 	}
 	return;
 });
