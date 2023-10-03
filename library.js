@@ -14,6 +14,11 @@ const submitButton = document.querySelector("#addBookButton");
 // this could be an object
 const books = [];
 
+/**
+ * Generates new ID numbers.
+ * @generator
+ * @yields {number}
+ */
 function* counter() {
 	let index = 1;
 	while (true) {
@@ -92,6 +97,7 @@ const Book = function(id, title, author, pages, read) {
 // (books don't give a shit about how that data is presented. That's another layer out.)
 /**
  * express string-able data as a Table Element (td or th)
+ * @function
  * @param {string} datum 
  * @param {string} elementType
  * @returns HTMLElement
@@ -103,6 +109,13 @@ const toTE = function(datum, elementType) {
 	return te;
 }
 
+/**
+ * Express boolean as a checkbox input inside a <td>
+ * @function
+ * @param {string} datum 
+ * @param {string} elementID
+ * @returns HTMLElement
+ */
 const toCBTD = function(datum, elementID) {
 	const td = document.createElement("td");
 	const cb = td.appendChild(document.createElement("input"));
@@ -166,10 +179,12 @@ submitButton.addEventListener("click", (e) => {
  * Given a book, adds that to the JS-level data
  * AND the DOM table. Prefer using this over
  * separate operations!
- * Todo: checking for duplicates in either case.
- * Todo: return false if the process failed ("failed" not defined)
- * Todo: throw errors?
- * @param {Book} book 
+ * @function addBook
+ * @todo return false if the process failed ("failed" not defined)
+ * @todo checking for duplicates in either case.
+ * @todo throw errors?
+ * @param {Book} book
+ * @returns {boolean}
  */
 const addBook = function(book) {
 	books.push(book);

@@ -11,6 +11,6 @@ Three main, independent arms that all need development.
 
 
 Status:
-1: Nothing done here at all
-2: Sufficient. At least most of what I have here has multiple uses.
+1: Arguably works, but doesn't match the spec and gives misleading feedback.
+2: Sufficient, but I don't love it. I want more flexibility.
 3: Nothing done here at all
