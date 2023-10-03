@@ -7,6 +7,9 @@ const recordTableBody = recordTable.querySelector("tbody");
 const newBookButton = document.querySelector('#add-book-open') // open dialog
 const addBookDialog = document.querySelector('#add-book-dialog')
 
+// testing only!
+const testClose = document.querySelector('#test-close')
+
 const formAddBook = document.querySelector(".form-add-book");
 const formTitle = document.querySelector("#book-title");
 const formAuthor = document.querySelector("#author");
@@ -18,6 +21,9 @@ newBookButton.addEventListener("click", (e) => {
 	addBookDialog.showModal();
 });
 
+testClose.addEventListener("click", (e) => {
+	addBookDialog.close();
+});
 
 // this could be an object
 const books = [];
