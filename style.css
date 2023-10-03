@@ -175,13 +175,15 @@ body {
 
 .form-add-book {
   display: grid;
-  grid-template-columns: 80px min-content 300px min-content;
+  grid-template-columns: 90px min-content 300px min-content;
   grid-template-rows: 2rem;
   grid-auto-rows: 2rem;
   align-items: center;
   justify-self: center;
 }
 
+/* this is the BRACE positioning */
+/* It seems pretty temperamental and a better way would be nice */
 .form-add-book > div {
   font-size: 180%;
   margin-top: -5px;
@@ -195,13 +197,20 @@ body {
 }
 
 .form-add-book > button {
-  grid-column: 3;
+  grid-column: 1 / -1;
   justify-self: center;
   width: 100px;
 }
 
 .form-add-book h3 {
-  grid-column: 1 / -1;
+  grid-column: 1;
+}
+
+/* need to rename this */
+.form-add-book #test-close {
+  margin-bottom: 10px;
+  grid-column: 2 / -1;
+  justify-self: end;
 }
 
 .section-table th,
