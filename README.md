@@ -10,8 +10,8 @@ There's also a half-dozen little UI/UX issues which would be nice to clean up if
 - Placeholders on all input fields
 - Nice scrolling if you have a LOT of books
 - The text fields and brackets don't seem to want to line up the same on different devices, though they're both Chrome.
+- Similarly, the sizing of the checkboxes and the "remove" button doesn't seem quite consistent either.
 - Using autofill on my home (fedora) computer applies a white background to the field, though this is not seen on the work (windows) computer (again, both Chrome)
-- Figure out what to do with the sidebar and top bar
 
 Furthermore, there's some points that would be valuable to work out for a full-scale project:
 - Modals for detailed information on different items
