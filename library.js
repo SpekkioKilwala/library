@@ -3,11 +3,8 @@
 // DOM-finding stuff
 const recordTable = document.querySelector(".section-table").querySelector("table");
 const recordTableBody = recordTable.querySelector("tbody");
-
 const newBookButton = document.querySelector('#add-book-open') // open dialog
 const addBookDialog = document.querySelector('#add-book-dialog')
-
-// testing only!
 const dialogClose = document.querySelector('#dialog-close')
 
 const formAddBook = document.querySelector(".form-add-book");
