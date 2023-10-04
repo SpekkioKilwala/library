@@ -150,8 +150,8 @@ const DotElement = function(tagName) {
 
 /**
  * Clears and re-adds all the child notes to the given <tr>
- * This is specifically for a book, and assumes that you want to do things
- * in this particular order.
+ * This is specifically for a book, and assumes that you want the
+ * columns to go in this particular order.
  * @param {HTMLElement} tr
  * @param {Book} book 
  */
@@ -164,7 +164,7 @@ const populateBookRow = function(tr, book) {
 	// Also consider: if you want to rearrange/reassign rows, just move the whole row.
 	
 	// The "read?" checkbox element.
-	// Do not try to do this with dot-notation.
+	// Do not try to convert this to dot-notation.
 	const cb = DotElement("input")
 		.xSetAttribute("type", "checkbox")
 		.xSetAttribute('id', `read-${book.id}`);
@@ -172,8 +172,6 @@ const populateBookRow = function(tr, book) {
 	cb.addEventListener("click", (e) => {
 		book.read = cb.checked;
 	});
-
-	// TODO: THE BUTTON
 
 	tr.append(
 			DotElement("th")
@@ -242,32 +240,31 @@ const addBook = function(book) {
 	return true;
 }
 
-addBook(Book(
-	idGenerator.next().value,
-	"The Hobbit",
-	"Jolkien Rolkien Rolkien Tolkien",
-	310,
-	true
-));
+const dataSet = [
+	Book(
+		idGenerator.next().value,
+		"The Hobbit",
+		"Jolkien Rolkien Rolkien Tolkien",
+		310,
+		true
+	),
+	Book(
+		idGenerator.next().value,
+		"Howl's Moving Castle",
+		"Diana Wynne Jones",
+		329,
+		true
+	),
+	Book(
+		idGenerator.next().value,
+		"The Well of Lost Plots",
+		"Jasper Fforde",
+		360,
+		true
+	)
+];
 
-addBook(Book(
-	idGenerator.next().value,
-	"Howl's Moving Castle",
-	"Diana Wynne Jones",
-	329,
-	true
-));
-
-addBook(Book(
-	idGenerator.next().value,
-	"The Well of Lost Plots",
-	"Jasper Fforde",
-	360,
-	true
-));
-
+dataSet.forEach((book) => {addBook(book)});
 // note that Array.prototype.forEach() can be used in many ways
 // including getting the index of the thing directly
 // you could use (book, i) => {function guts here} and that gives you the index as well
-// and use that in your function guts.
-// books.forEach((book) => recordTableBody.append(bookToRow(book)));
