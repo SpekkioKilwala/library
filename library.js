@@ -166,16 +166,35 @@ const DotElement = function(tagName) {
 		writable: false
 	});
 
+	Object.defineProperty(element, 'xAddEventListener', {
+		value: (type, handler) => {
+			element.addEventListener(type, handler);
+			return element;
+		},
+		writable: false
+	});
+
 	return element;
 }
 
-const populateBookRow2 = function(tr, book) {
+const populateBookRow = function(tr, book) {
 	tr.removeAttribute("data-id"); // in case you are reallocating the row
 	// Wait. What happens if the tr has OTHER attributes?
 	// Well, that's just a completely different set of concerns.
 	// All I care about is what data it contains and what object that's associated with.
 	tr.replaceChildren(); // remove all children
 	tr.setAttribute("data-id", book.id);
+
+	// The "read?" checkbox element.
+	// Trying to do this entirely with dot notation looks like
+	// an absolute rats-nest so I'm going to just not do that.
+	const cb = DotElement("input")
+		.xSetAttribute("type", "checkbox")
+		.xSetAttribute('id', `read-${book.id}`);
+	cb.checked = book.read;
+	cb.addEventListener("click", (e) => {
+		book.read = cb.checked;
+	});
 
 	tr.append(
 			DotElement("th")
@@ -188,14 +207,11 @@ const populateBookRow2 = function(tr, book) {
 			DotElement("td")
 				.xAppend(book.pages),
 			DotElement("td")
-				.xAppend(toCBTD(book.read, (e, newState, cbID) => {book.read = newState}, `read-${book.id}`)),
+				.xAppend(cb),
 			DotElement("td")
 				.xAppend("Remove")
 	)
-	// toCBTD(book.read, (e, newState, cbID) => {book.read = newState}, `read-${book.id}`)
 }
-
-
 
 /**
  * Clears and re-adds all the child notes to the given <tr>
@@ -205,7 +221,7 @@ const populateBookRow2 = function(tr, book) {
  * @param {HTMLElement} tr
  * @param {Book} book 
  */
-const populateBookRow = function(tr, book) {
+const populateBookRowX = function(tr, book) {
 	tr.removeAttribute("data-id"); // in case you are reallocating the row
 	tr.replaceChildren(); // remove all children
 	tr.setAttribute("data-id", book.id);
@@ -227,7 +243,7 @@ const bookToRow = function(book) {
 	// create a table row (tr > th td td td)
 	// and return that node.
 	const tr = document.createElement("tr");
-	populateBookRow2(tr, book);
+	populateBookRow(tr, book);
 	return tr;
 }
 
