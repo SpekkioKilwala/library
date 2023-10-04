@@ -14,6 +14,15 @@ const formPages = document.querySelector("#pages");
 const formRead = document.querySelector("#read");
 const submitButton = document.querySelector("#add-book-submit");
 
+const addFiveButton = document.querySelector("#add-5");
+addFiveButton.addEventListener("click", (e) => {
+	addBook(Book(idGenerator.next().value, "Moby Dick", "Ishmael", "20", false));
+	addBook(Book(idGenerator.next().value, "Moby Dick", "Ishmael", "20", false));
+	addBook(Book(idGenerator.next().value, "Moby Dick", "Ishmael", "20", false));
+	addBook(Book(idGenerator.next().value, "Moby Dick", "Ishmael", "20", false));
+	addBook(Book(idGenerator.next().value, "Moby Dick", "Ishmael", "20", false));
+});
+
 newBookButton.addEventListener("click", (e) => {
 	addBookDialog.showModal();
 	formAddBook.reset();
