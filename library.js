@@ -182,7 +182,7 @@ const DotElement = function(tagName) {
 	// So actually I want this to just be a reference to an function on the outside.
 	// I am not quite sure how to declare that one.
 	// Aside: I actually cannot believe that I apparently wrote this correctly on the first try.
-	Object.defineProperty(element, 'setAtt', {
+	Object.defineProperty(element, 'xSetAttribute', {
 		value: (attribute, value) => {
 			element.setAttribute(attribute, value);
 			return element;
@@ -209,22 +209,19 @@ const populateBookRow2 = function(tr, book) {
 	tr.replaceChildren(); // remove all children
 	tr.setAttribute("data-id", book.id);
 
-	// concise alias
-	const El = DotElement; // the document.createElement + methods factory
-
 	tr.append(
-			El("th")
-				.setAtt("id", book.id)
+			DotElement("th")
+				.xSetAttribute("id", book.id)
 				.xAppend(book.id),
-			El("td")
+			DotElement("td")
 				.xAppend(book.title),
-			El("td")
+			DotElement("td")
 				.xAppend(book.author),
-			El("td")
+			DotElement("td")
 				.xAppend(book.pages),
-			El("td")
+			DotElement("td")
 				.xAppend("X"),
-			El("td")
+			DotElement("td")
 				.xAppend("Remove")
 	)
 
