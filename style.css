@@ -178,19 +178,20 @@ body {
 .sidebar {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   justify-content: start;
   border-right: 2px solid var(--border);
+  gap: 10px;
 }
 
 .sidebar > h3 {
   text-align: center;
-  padding: 20px;
+  padding: 20px 10px 10px 10px;
 }
 
-.sidebar > #add-book-open {
-  width: fit-content;
+.sidebar > button {
   padding: 10px 20px;
+  margin: 0px 20px;
 }
 
 .main {
