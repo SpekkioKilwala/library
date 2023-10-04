@@ -104,38 +104,6 @@ const Book = function(id, title, author, pages, read) {
 // you'll need node.parentElement
 
 
-// these make too many assumptions but making a singular general
-// form would be 3x as many lines for no benefit.
-// Alternatively, this logic could be known to the book objects themselves.
-// 	"book, tell me what that member looks like as a table row."
-// But I'm pretty sure THAT'S a violation of separation of concerns.
-// (books don't know about how that data is presented. That's another layer out.)
-//	So, books could have some kind of wrapper, or I make a tabular-object composed oject.
-//		The latter might not be efficient at scale.
-//		I might actually need to use inheritance.
-// 		Or, don't structure your UI that way.
-// It just circles back to the fundamental problem:
-// how to represent an object on the screen.
-// I thought htmx was semi- insane but this kind of problem really makes it look good.
-/**
- * express string-able data as a Table Element (td or th)
- * @function
- * @todo Redo these so that they're not factories at all.
- * Making a new node is free, putting things inside them is awkward.
- * Your factory just takes a form node and whatever should go inside it.
- * 	The insides are in an array.
- * So you can call it with a node that you just constructed inside the call,
- * Or give it an existing node.
- * Which means it's reusable for an entire row?
- * @param {string} datum 
- * @param {string} elementType
- * @returns {HTMLElement}
- */
-const toTE = function(datum, elementType) {
-	const te = document.createElement(elementType);
-	te.textContent = datum;
-	return te;
-}
 
 /**
  * Express boolean as a checkbox input inside a <td>
