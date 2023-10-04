@@ -166,41 +166,6 @@ const toCBTD = function(datum, handler, elementID) {
 }
 
 /**
- * Create a button inside a <td> 
- * @param {function} handler 
- * @param {string} elementID 
- */
-const buttonTD = function(handler, elementID) {
-
-}
-
-// actually no I can do better
-
-// /**
-//  * This is .append() but returns the element you're operating on
-//  * This should let me write more readable code
-//  * @param {Element} element 
-//  * @param {*} thing 
-//  * @returns {Element}
-//  */
-// const xAppend = function(element, thing) {
-// 	element.append(thing);
-// 	return element;
-// }
-
-// /**
-//  * This is setAttribute but returns the element in question
-//  * This should let me write more readable code
-//  * @param {Element} element 
-//  * @param {*} thing 
-//  * @returns {Element}
-//  */
-// const xSetAttribute = function(element, attribute, value) {
-// 	element.setAttribute(attribute, value);
-// 	return element;
-// }
-
-/**
  * Creates an element with extra methods, for more concise code.
  * The whole point being that now I can chain dot operations,
  * or make an element, do a bunch of operations on it, and then pass that to something else.
@@ -225,7 +190,7 @@ const DotElement = function(tagName) {
 		writable: false
 	});
 
-	Object.defineProperty(element, 'append', {
+	Object.defineProperty(element, 'xAppend', {
 		value: (child) => {
 			element.append(child);
 			return element;
@@ -244,25 +209,31 @@ const populateBookRow2 = function(tr, book) {
 	tr.replaceChildren(); // remove all children
 	tr.setAttribute("data-id", book.id);
 
-	const d = document // concise aliases
-	const attr = xSetAttribute;
-	const apnd = xAppend;
+	// concise alias
+	const El = DotElement; // the document.createElement + methods factory
 
 	tr.append(
-			d.createElement("th"),
-			(title),
-			(author),
-			(pages),
-			(checkboxWithIDAndListenerInATd),
-			(Remove)
+			El("th")
+				.setAtt("id", book.id)
+				.xAppend(book.id),
+			El("td")
+				.xAppend(book.title),
+			El("td")
+				.xAppend(book.author),
+			El("td")
+				.xAppend(book.pages),
+			El("td")
+				.xAppend("X"),
+			El("td")
+				.xAppend("Remove")
 	)
 
-	tr.appendChild(toTE(book.id, "th")); // ID column
-	tr.appendChild(toTE(book.title, "td")); // Title column
-	tr.appendChild(toTE(book.author, "td")); // Author
-	tr.appendChild(toTE(book.pages, "td")); // Pages
-	tr.appendChild(toCBTD(book.read, (e, newState, cbID) => {book.read = newState}, `read-${book.id}`)) // Checkbox
-	tr.appendChild(toTE("Remove", "td")) // Remove thingy
+	// tr.appendChild(toTE(book.id, "th")); // ID column
+	// tr.appendChild(toTE(book.title, "td")); // Title column
+	// tr.appendChild(toTE(book.author, "td")); // Author
+	// tr.appendChild(toTE(book.pages, "td")); // Pages
+	// tr.appendChild(toCBTD(book.read, (e, newState, cbID) => {book.read = newState}, `read-${book.id}`)) // Checkbox
+	// tr.appendChild(toTE("Remove", "td")) // Remove thingy
 }
 
 
@@ -297,7 +268,7 @@ const bookToRow = function(book) {
 	// create a table row (tr > th td td td)
 	// and return that node.
 	const tr = document.createElement("tr");
-	populateBookRow(tr, book);
+	populateBookRow2(tr, book);
 	return tr;
 }
 
