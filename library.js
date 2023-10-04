@@ -98,45 +98,16 @@ const Book = function(id, title, author, pages, read) {
 // That object needs to be closely linked to the table
 // itself - one defines the other.
 
-// So I need osme kind of "table definition" objec?
+// So I need osme kind of "table definition" object?
 // Giving you an order of column headers and how to get each one.
-
 // you'll need node.parentElement
 
-
-
-/**
- * Express boolean as a checkbox input inside a <td>
- * ALSO adds the event listener.
- * @function
- * @todo Rename to align to factory style
- * @param {string} datum 
- * @param {function} handler
- * @param {string} elementID
- * @returns {HTMLElement}
- */
-const toCBTD = function(datum, handler, elementID) {
-	const td = document.createElement("td");
-	const cb = td.appendChild(document.createElement("input"));
-	cb.setAttribute("type", "checkbox");
-	cb.setAttribute("id", elementID);
-	cb.checked = datum;
-	// Because you can always move nodes around, the event listener
-	// has to be attached correctly (in this case, also created)
-	// when the checkbox is.
-	cb.addEventListener("click", (e) => {
-		// I'm still assuming that every checkbox will need a click handler
-		console.log(`${cb.id} : ${cb.checked}`);
-		//book.read = cb.checked;
-		handler(e, cb.checked, cb.id);
-	});
-	return td;
-}
 
 /**
  * Creates an element with extra methods, for more concise code.
  * The whole point being that now I can chain dot operations,
- * or make an element, do a bunch of operations on it, and then pass that to something else.
+ * and/or make an element, do a bunch of operations on it,
+ * and then pass that to something else.
  * @factory
  * @param {string} tagName
  * @returns {Element} element
@@ -177,17 +148,23 @@ const DotElement = function(tagName) {
 	return element;
 }
 
+/**
+ * Clears and re-adds all the child notes to the given <tr>
+ * This is specifically for a book, and assumes that you want to do things
+ * in this particular order.
+ * @param {HTMLElement} tr
+ * @param {Book} book 
+ */
 const populateBookRow = function(tr, book) {
-	tr.removeAttribute("data-id"); // in case you are reallocating the row
-	// Wait. What happens if the tr has OTHER attributes?
-	// Well, that's just a completely different set of concerns.
-	// All I care about is what data it contains and what object that's associated with.
-	tr.replaceChildren(); // remove all children
 	tr.setAttribute("data-id", book.id);
-
+	// I'm not concerned with other attributes, only the one that says
+	// what item this row is associated with.
+	tr.replaceChildren();
+	// Consider: returning all the existing children.
+	// Also consider: if you want to rearrange/reassign rows, just move the whole row.
+	
 	// The "read?" checkbox element.
-	// Trying to do this entirely with dot notation looks like
-	// an absolute rats-nest so I'm going to just not do that.
+	// Do not try to do this with dot-notation.
 	const cb = DotElement("input")
 		.xSetAttribute("type", "checkbox")
 		.xSetAttribute('id', `read-${book.id}`);
@@ -195,6 +172,8 @@ const populateBookRow = function(tr, book) {
 	cb.addEventListener("click", (e) => {
 		book.read = cb.checked;
 	});
+
+	// TODO: THE BUTTON
 
 	tr.append(
 			DotElement("th")
@@ -209,34 +188,14 @@ const populateBookRow = function(tr, book) {
 			DotElement("td")
 				.xAppend(cb),
 			DotElement("td")
-				.xAppend("Remove")
+				.xAppend("Remove") // <---- BUTTON HERE
 	)
-}
-
-/**
- * Clears and re-adds all the child notes to the given <tr>
- * This is specifically for a book, and assumes that you want to do things
- * in this particular order. If you want things to happen in an order,
- * you'll need to pass that in.
- * @param {HTMLElement} tr
- * @param {Book} book 
- */
-const populateBookRowX = function(tr, book) {
-	tr.removeAttribute("data-id"); // in case you are reallocating the row
-	tr.replaceChildren(); // remove all children
-	tr.setAttribute("data-id", book.id);
-
-	tr.appendChild(toTE(book.id, "th")); // ID column
-	tr.appendChild(toTE(book.title, "td")); // Title column
-	tr.appendChild(toTE(book.author, "td")); // Author
-	tr.appendChild(toTE(book.pages, "td")); // Pages
-	tr.appendChild(toCBTD(book.read, (e, newState, cbID) => {book.read = newState}, `read-${book.id}`)) // Checkbox
-	tr.appendChild(toTE("Remove", "td")) // Remove thingy
 }
 
 /**
  * Makes a table row from an object.
  * @param {Book} book
+ * @return {Element}
  */
 const bookToRow = function(book) {
 	// Given a book object,
