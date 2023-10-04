@@ -172,6 +172,11 @@ const populateBookRow = function(tr, book) {
 		book.read = readCheckbox.checked;
 	});
 
+	const removeButton = DotElement("button")
+		.xSetAttribute("type", "button")
+		.xSetAttribute("id", `remove-${book.id}`)
+		.xAppend("Remove");
+
 	tr.append(
 			DotElement("th")
 				.xSetAttribute("id", book.id)
@@ -185,7 +190,7 @@ const populateBookRow = function(tr, book) {
 			DotElement("td")
 				.xAppend(readCheckbox),
 			DotElement("td")
-				.xAppend("Remove") // <---- BUTTON HERE
+				.xAppend(removeButton)
 	)
 }
 
