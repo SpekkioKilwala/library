@@ -175,6 +175,13 @@ const populateBookRow = function(tr, book) {
 		.xAppend("Remove");
 	removeButton.addEventListener("click", (e) => {
 		console.log(`Attempted removal on ${removeButton.id}`);
+		// I need to deal with:
+		// - the books array (find the book in the array, remove it)
+		// - the table row.
+		// Finding the object in an unordered array is not efficient.
+		// 	So, that should be an object, using ID as key.
+		// However, the table row is immediately accessible in this context.
+		console.log(book);
 	});
 
 	tr.append(
@@ -242,6 +249,14 @@ const addBook = function(book) {
 	books.push(book);
 	recordTableBody.append(bookToRow(book));
 	return true;
+}
+
+/**
+ * Remove the book and delete the row
+ * @param {Book} book 
+ */
+const removeBook = function(book) {
+
 }
 
 const dataSet = [
