@@ -220,17 +220,11 @@ const populateBookRow2 = function(tr, book) {
 			DotElement("td")
 				.xAppend(book.pages),
 			DotElement("td")
-				.xAppend("X"),
+				.xAppend(toCBTD(book.read, (e, newState, cbID) => {book.read = newState}, `read-${book.id}`)),
 			DotElement("td")
 				.xAppend("Remove")
 	)
-
-	// tr.appendChild(toTE(book.id, "th")); // ID column
-	// tr.appendChild(toTE(book.title, "td")); // Title column
-	// tr.appendChild(toTE(book.author, "td")); // Author
-	// tr.appendChild(toTE(book.pages, "td")); // Pages
-	// tr.appendChild(toCBTD(book.read, (e, newState, cbID) => {book.read = newState}, `read-${book.id}`)) // Checkbox
-	// tr.appendChild(toTE("Remove", "td")) // Remove thingy
+	// toCBTD(book.read, (e, newState, cbID) => {book.read = newState}, `read-${book.id}`)
 }
 
 
