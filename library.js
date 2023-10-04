@@ -176,6 +176,9 @@ const populateBookRow = function(tr, book) {
 		.xSetAttribute("type", "button")
 		.xSetAttribute("id", `remove-${book.id}`)
 		.xAppend("Remove");
+	removeButton.addEventListener("click", (e) => {
+		console.log(`Attempted removal on ${removeButton.id}`);
+	});
 
 	tr.append(
 			DotElement("th")
