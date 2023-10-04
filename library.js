@@ -109,16 +109,29 @@ const Book = function(id, title, author, pages, read) {
 // Alternatively, this logic could be known to the book objects themselves.
 // 	"book, tell me what that member looks like as a table row."
 // But I'm pretty sure THAT'S a violation of separation of concerns.
-// (books don't give a shit about how that data is presented. That's another layer out.)
+// (books don't know about how that data is presented. That's another layer out.)
+//	So, books could have some kind of wrapper, or I make a tabular-object composed oject.
+//		The latter might not be efficient at scale.
+//		I might actually need to use inheritance.
+// 		Or, don't structure your UI that way.
+// It just circles back to the fundamental problem:
+// how to represent an object on the screen.
+// I thought htmx was semi- insane but this kind of problem really makes it look good.
 /**
  * express string-able data as a Table Element (td or th)
  * @function
+ * @todo Redo these so that they're not factories at all.
+ * Making a new node is free, putting things inside them is awkward.
+ * Your factory just takes a form node and whatever should go inside it.
+ * 	The insides are in an array.
+ * So you can call it with a node that you just constructed inside the call,
+ * Or give it an existing node.
+ * Which means it's reusable for an entire row?
  * @param {string} datum 
  * @param {string} elementType
- * @returns HTMLElement
+ * @returns {HTMLElement}
  */
 const toTE = function(datum, elementType) {
-	// console.log(`${datum} : ${elementType}`);
 	const te = document.createElement(elementType);
 	te.textContent = datum;
 	return te;
@@ -128,6 +141,7 @@ const toTE = function(datum, elementType) {
  * Express boolean as a checkbox input inside a <td>
  * ALSO adds the event listener.
  * @function
+ * @todo Rename to align to factory style
  * @param {string} datum 
  * @param {function} handler
  * @param {string} elementID
@@ -152,7 +166,103 @@ const toCBTD = function(datum, handler, elementID) {
 }
 
 /**
+ * Create a button inside a <td> 
+ * @param {function} handler 
+ * @param {string} elementID 
+ */
+const buttonTD = function(handler, elementID) {
+
+}
+
+// actually no I can do better
+
+// /**
+//  * This is .append() but returns the element you're operating on
+//  * This should let me write more readable code
+//  * @param {Element} element 
+//  * @param {*} thing 
+//  * @returns {Element}
+//  */
+// const xAppend = function(element, thing) {
+// 	element.append(thing);
+// 	return element;
+// }
+
+// /**
+//  * This is setAttribute but returns the element in question
+//  * This should let me write more readable code
+//  * @param {Element} element 
+//  * @param {*} thing 
+//  * @returns {Element}
+//  */
+// const xSetAttribute = function(element, attribute, value) {
+// 	element.setAttribute(attribute, value);
+// 	return element;
+// }
+
+/**
+ * Creates an element with extra methods, for more concise code.
+ * The whole point being that now I can chain dot operations,
+ * or make an element, do a bunch of operations on it, and then pass that to something else.
+ * @factory
+ * @param {string} tagName
+ * @returns {Element} element
+ * @todo the optional "options" parameter of .createElement
+ * @todo work out whether you ever call .createElement on anything OTHER than the document
+ */
+const DotElement = function(tagName) {
+	const element = document.createElement(tagName);
+
+	// Aside: I actually cannot believe that I apparently wrote this correctly on the first try.
+	// Beware: declaring this in HERE, these will all end up as DIFFERENT functions per object!
+	// So actually I want to declare them on the outside.
+	Object.defineProperty(element, 'setAtt', {
+		value: (attribute, value) => {
+			element.setAttribute(attribute, value);
+			return element;
+		},
+		writable: false
+	});
+
+	return element;
+}
+
+const populateBookRow2 = function(tr, book) {
+	tr.removeAttribute("data-id"); // in case you are reallocating the row
+	// Wait. What happens if the tr has OTHER attributes?
+	// Well, that's just a completely different set of concerns.
+	// All I care about is what data it contains and what object that's associated with.
+	tr.replaceChildren(); // remove all children
+	tr.setAttribute("data-id", book.id);
+
+	const d = document // concise aliases
+	const attr = xSetAttribute;
+	const apnd = xAppend;
+
+	tr.append(
+			d.createElement("th"),
+			(title),
+			(author),
+			(pages),
+			(checkboxWithIDAndListenerInATd),
+			(Remove)
+	)
+
+	tr.appendChild(toTE(book.id, "th")); // ID column
+	tr.appendChild(toTE(book.title, "td")); // Title column
+	tr.appendChild(toTE(book.author, "td")); // Author
+	tr.appendChild(toTE(book.pages, "td")); // Pages
+	tr.appendChild(toCBTD(book.read, (e, newState, cbID) => {book.read = newState}, `read-${book.id}`)) // Checkbox
+	tr.appendChild(toTE("Remove", "td")) // Remove thingy
+}
+
+
+
+/**
  * Clears and re-adds all the child notes to the given <tr>
+ * This is specifically for a book, and assumes that you want to do things
+ * in this particular order. If you want things to happen in an order,
+ * you'll need to pass that in.
  * @param {HTMLElement} tr
  * @param {Book} book 
  */
