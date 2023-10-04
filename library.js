@@ -163,14 +163,13 @@ const populateBookRow = function(tr, book) {
 	// Consider: returning all the existing children.
 	// Also consider: if you want to rearrange/reassign rows, just move the whole row.
 	
-	// The "read?" checkbox element.
 	// Do not try to convert this to dot-notation.
-	const cb = DotElement("input")
+	const readCheckbox = DotElement("input")
 		.xSetAttribute("type", "checkbox")
 		.xSetAttribute('id', `read-${book.id}`);
-	cb.checked = book.read;
-	cb.addEventListener("click", (e) => {
-		book.read = cb.checked;
+	readCheckbox.checked = book.read;
+	readCheckbox.addEventListener("click", (e) => {
+		book.read = readCheckbox.checked;
 	});
 
 	tr.append(
@@ -184,7 +183,7 @@ const populateBookRow = function(tr, book) {
 			DotElement("td")
 				.xAppend(book.pages),
 			DotElement("td")
-				.xAppend(cb),
+				.xAppend(readCheckbox),
 			DotElement("td")
 				.xAppend("Remove") // <---- BUTTON HERE
 	)
