@@ -213,12 +213,21 @@ const buttonTD = function(handler, elementID) {
 const DotElement = function(tagName) {
 	const element = document.createElement(tagName);
 
-	// Aside: I actually cannot believe that I apparently wrote this correctly on the first try.
 	// Beware: declaring this in HERE, these will all end up as DIFFERENT functions per object!
-	// So actually I want to declare them on the outside.
+	// So actually I want this to just be a reference to an function on the outside.
+	// I am not quite sure how to declare that one.
+	// Aside: I actually cannot believe that I apparently wrote this correctly on the first try.
 	Object.defineProperty(element, 'setAtt', {
 		value: (attribute, value) => {
 			element.setAttribute(attribute, value);
+			return element;
+		},
+		writable: false
+	});
+
+	Object.defineProperty(element, 'append', {
+		value: (child) => {
+			element.append(child);
 			return element;
 		},
 		writable: false
