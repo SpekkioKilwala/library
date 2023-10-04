@@ -23,8 +23,10 @@ dialogClose.addEventListener("click", (e) => {
 	addBookDialog.close();
 });
 
-// this could be an object
-const books = [];
+// books are saved using their ID as the key.
+// This ensures no ID collisions and makes it
+// trivial to grab the book when you have the ID.
+const books = {};
 
 /**
  * Generates new ID numbers.
@@ -175,13 +177,11 @@ const populateBookRow = function(tr, book) {
 		.xAppend("Remove");
 	removeButton.addEventListener("click", (e) => {
 		console.log(`Attempted removal on ${removeButton.id}`);
-		// I need to deal with:
-		// - the books array (find the book in the array, remove it)
+		// Books exist in the underlying data and as a DOM row.
+		// - the books object (find the book, remove it)
 		// - the table row.
-		// Finding the object in an unordered array is not efficient.
-		// 	So, that should be an object, using ID as key.
-		// However, the table row is immediately accessible in this context.
-		console.log(book);
+		delete books[book.id];
+		tr.remove();
 	});
 
 	tr.append(
@@ -246,17 +246,9 @@ submitButton.addEventListener("click", (e) => {
  * @returns {boolean}
  */
 const addBook = function(book) {
-	books.push(book);
+	books[book.id] = book;
 	recordTableBody.append(bookToRow(book));
 	return true;
-}
-
-/**
- * Remove the book and delete the row
- * @param {Book} book 
- */
-const removeBook = function(book) {
-
 }
 
 const dataSet = [
