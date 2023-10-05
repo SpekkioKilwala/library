@@ -194,6 +194,11 @@ body {
   margin: 0px 20px;
 }
 
+/* It's unclear why specifying only overflow-y results
+in the desired behaviour (this content should fit horizontally,
+no horizontal scroll is wanted) - but specifying neither
+results in vertical AND horizontal scrollbars to appear as
+soon as many items are being displayed. */
 .main {
   display: grid;
   justify-content: center;
@@ -201,7 +206,6 @@ body {
   padding: 20px;
   gap: 20px;
   overflow-y: scroll;
-  overflow-x: hidden;
 }
 
 .form-add-book {
