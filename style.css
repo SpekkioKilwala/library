@@ -265,10 +265,6 @@ soon as many items are being displayed. */
   margin-bottom: 15px;
 }
 
-.section-table th {
-  position: sticky;
-}
-
 .section-table th,
 .section-table td {
   padding-bottom: 2px;
@@ -276,6 +272,11 @@ soon as many items are being displayed. */
   padding-right: 0.5em;
   text-align: center;
   vertical-align: center;
+}
+
+/* This doesn't work and I don't know why */
+.section-table thead {
+  position: sticky;
 }
 
 .section-table td input[type=checkbox] {
