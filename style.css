@@ -99,6 +99,12 @@ dialog {
   background-color: var(--text);
 }
 
+/* No apparent effect on firefox? May be down to OS */
+/* .main {
+  scrollbar-base-color: black;
+  scrollbar-color: yellow;
+} */
+
 input {
   background-color: transparent;
   border: none;
