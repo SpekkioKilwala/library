@@ -7,7 +7,8 @@ The app has three main interactions.
 3. Editing and deleting the data via that same table. (done)
 
 Todo:
-- Nice scrolling if you have a LOT of books. (anchoring the top line?)
+- Nice scrolling if you have a LOT of books. (sticky top line)
+
 
 There's a few little little UI/UX issues which would be nice to clean up if I can find out how.
 - The text fields and brackets don't seem to want to line up the same on different devices, though they're both Chrome.
