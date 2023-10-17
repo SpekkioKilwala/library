@@ -11,6 +11,9 @@
 // nope
 // import(DiceRoller)
 
+// require() is not supported in browsers generally
+// const roller = require('@dice-roller/rpg-dice-roller');
+
 // const roller = new DiceRoller
 // let diceResult = roller.roll('2d6')
 
