@@ -1,5 +1,11 @@
 "use strict";
 
+// The import isn't working.
+import { DiceRoller } from '@dice-roller/rpg-dice-roller'
+// import(DiceRoller)
+const roller = new DiceRoller
+let diceResult = roller.roll('2d6')
+
 // DOM-finding stuff
 const recordTable = document.querySelector(".section-table").querySelector("table");
 const recordTableBody = recordTable.querySelector("tbody");
