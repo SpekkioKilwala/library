@@ -1,12 +1,12 @@
 {
   "dependencies": {
-    "@dice-roller/rpg-dice-roller": "^5.4.1"
+    "@dice-roller/rpg-dice-roller": "^5.4.1",
+    "moment": "^2.29.4"
   },
   "name": "library",
   "description": "The Odin Project: Library assignment",
   "version": "1.0.0",
   "main": "library.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
