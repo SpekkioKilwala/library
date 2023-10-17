@@ -288,3 +288,30 @@ dataSet.forEach((book) => {addBook(book)});
 // note that Array.prototype.forEach() can be used in many ways
 // including getting the index of the thing directly
 // you could use (book, i) => {function guts here} and that gives you the index as well
+
+class User {
+	constructor(name) { // invokes setter
+		this.name = name;
+	}
+
+	diet = "jam";
+	// This is a direct class field
+	// They exist in the object itself, not in the object's prototype.
+	// I'm not sure what difference that practically makes.
+
+	get name() { // getter methods have the parens on the declaration, not when used
+		return this._name;
+	}
+
+	set name(value) {
+		if (value.length < 4) {
+			alert("Name is too short.");
+			return;
+		}
+		this._name = value;
+	}
+}
+
+class SubUser extends User {
+	// subuser also inherits the jam diet
+}
