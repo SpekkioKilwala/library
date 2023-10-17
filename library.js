@@ -16,11 +16,11 @@ const submitButton = document.querySelector("#add-book-submit");
 
 const addFiveButton = document.querySelector("#add-5");
 addFiveButton.addEventListener("click", (e) => {
-	addBook(Book(idGenerator.next().value, "Moby Dick", "Ishmael", "20", false));
-	addBook(Book(idGenerator.next().value, "Moby Dick", "Ishmael", "20", false));
-	addBook(Book(idGenerator.next().value, "Moby Dick", "Ishmael", "20", false));
-	addBook(Book(idGenerator.next().value, "Moby Dick", "Ishmael", "20", false));
-	addBook(Book(idGenerator.next().value, "Moby Dick", "Ishmael", "20", false));
+	addBook(new Book(idGenerator.next().value, "Moby Dick", "Ishmael", "20", false));
+	addBook(new Book(idGenerator.next().value, "Moby Dick", "Ishmael", "20", false));
+	addBook(new Book(idGenerator.next().value, "Moby Dick", "Ishmael", "20", false));
+	addBook(new Book(idGenerator.next().value, "Moby Dick", "Ishmael", "20", false));
+	addBook(new Book(idGenerator.next().value, "Moby Dick", "Ishmael", "20", false));
 });
 
 newBookButton.addEventListener("click", (e) => {
@@ -32,10 +32,26 @@ dialogClose.addEventListener("click", (e) => {
 	addBookDialog.close();
 });
 
-// books are saved using their ID as the key.
-// This ensures no ID collisions and makes it
-// trivial to grab the book when you have the ID.
+// books are saved using their ID as the key:
+// No collisions, makes it trivial to get the book if you have the key.
 const books = {};
+
+/**
+ * Given a book, adds that to the JS-level data
+ * AND the DOM table. Prefer using this over
+ * separate operations!
+ * @function addBook
+ * @todo return false if the process failed ("failed" not defined)
+ * @todo checking for duplicates in either case.
+ * @todo throw errors?
+ * @param {Book} book
+ * @returns {boolean}
+ */
+const addBook = function(book) {
+	books[book.id] = book;
+	recordTableBody.append(bookToRow(book));
+	return true;
+}
 
 /**
  * Generates new ID numbers.
@@ -60,20 +76,62 @@ const idGenerator = counter(); // not a singleton!
  * @param {string} pages
  * @param {boolean} read
  */
-const Book = function(id, title, author, pages, read) {
-	const info = function() {
+class Book {
+	constructor(id, title, author, pages, read) {
+		this.id = id;
+		this.title = title;
+		this.author = author;
+		this.pages = pages;
+		this.read = read;
+	}
+
+	info() {
 		return (`${this.title}, by ${this.author}, ${this.pages} pages, read: ${this.read}`)
 	}
 
-	return {
-		id,
-		title,
-		author,
-		pages,
-		read,
-		info,
-	}
+	// class examples for reference
+	
+	// 	diet = "jam";
+	// 	// This is a direct class field
+	// 	// They exist in the object itself, not in the object's prototype.
+	// 	// I'm not sure what difference that practically makes.
+
+	// 	get name() { // getter methods have the parens on the declaration, not when used
+	// 		return this._name;
+	// 	}
+
+	// 	set name(value) {
+	// 		if (value.length < 4) {
+	// 			alert("Name is too short.");
+	// 			return;
+	// 		}
+	// 		this._name = value;
+	// 	}
 }
+
+const dataSet = [
+	new Book(
+		idGenerator.next().value,
+		"The Hobbit",
+		"Jolkien Rolkien Rolkien Tolkien",
+		310,
+		true
+	),
+	new Book(
+		idGenerator.next().value,
+		"Howl's Moving Castle",
+		"Diana Wynne Jones",
+		329,
+		true
+	),
+	new Book(
+		idGenerator.next().value,
+		"The Well of Lost Plots",
+		"Jasper Fforde",
+		360,
+		true
+	)
+];
 
 // What I'd really, really want is the ability
 // to look for the appropriate header for any
@@ -229,7 +287,7 @@ submitButton.addEventListener("click", (e) => {
 		console.log("Fail!");
 		return;
 	}
-	const newBook = Book(
+	const newBook = new Book(
 		idGenerator.next().value,
 		formTitle.value,
 		formAuthor.value,
@@ -243,75 +301,7 @@ submitButton.addEventListener("click", (e) => {
 	return;
 });
 
-/**
- * Given a book, adds that to the JS-level data
- * AND the DOM table. Prefer using this over
- * separate operations!
- * @function addBook
- * @todo return false if the process failed ("failed" not defined)
- * @todo checking for duplicates in either case.
- * @todo throw errors?
- * @param {Book} book
- * @returns {boolean}
- */
-const addBook = function(book) {
-	books[book.id] = book;
-	recordTableBody.append(bookToRow(book));
-	return true;
-}
-
-const dataSet = [
-	Book(
-		idGenerator.next().value,
-		"The Hobbit",
-		"Jolkien Rolkien Rolkien Tolkien",
-		310,
-		true
-	),
-	Book(
-		idGenerator.next().value,
-		"Howl's Moving Castle",
-		"Diana Wynne Jones",
-		329,
-		true
-	),
-	Book(
-		idGenerator.next().value,
-		"The Well of Lost Plots",
-		"Jasper Fforde",
-		360,
-		true
-	)
-];
-
 dataSet.forEach((book) => {addBook(book)});
 // note that Array.prototype.forEach() can be used in many ways
 // including getting the index of the thing directly
 // you could use (book, i) => {function guts here} and that gives you the index as well
-
-class User {
-	constructor(name) { // invokes setter
-		this.name = name;
-	}
-
-	diet = "jam";
-	// This is a direct class field
-	// They exist in the object itself, not in the object's prototype.
-	// I'm not sure what difference that practically makes.
-
-	get name() { // getter methods have the parens on the declaration, not when used
-		return this._name;
-	}
-
-	set name(value) {
-		if (value.length < 4) {
-			alert("Name is too short.");
-			return;
-		}
-		this._name = value;
-	}
-}
-
-class SubUser extends User {
-	// subuser also inherits the jam diet
-}
