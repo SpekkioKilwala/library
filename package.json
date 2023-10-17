@@ -1,5 +1,26 @@
 {
   "dependencies": {
     "@dice-roller/rpg-dice-roller": "^5.4.1"
-  }
+  },
+  "name": "library",
+  "description": "The Odin Project: Library assignment",
+  "version": "1.0.0",
+  "main": "library.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SpekkioKilwala/library.git"
+  },
+  "keywords": [
+    "odin"
+  ],
+  "author": "Spekkio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SpekkioKilwala/library/issues"
+  },
+  "homepage": "https://github.com/SpekkioKilwala/library#readme"
 }
